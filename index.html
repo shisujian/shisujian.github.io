@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
+<![endif]-->
+<!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+<!--<![endif]-->
+    <link rel="stylesheet" href="./style.css">   <!-- 写在pure.css官网提供的Link后，后期新的样式会覆盖pure提供的样式-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,user-scalable=0">   <!-- 很重要，响应式网站必须写这行-->
+
+
+    <style>
+        .works{
+            position: relative;
+            width: 50%;
+            height: auto;
+            margin: 0px auto;
+            background-color:rgb(255, 255, 255);
+        }
+        .work{
+            margin: 20px;
+        }
+</style>
+
+<style>
+  .video-responsive{
+    position: relative;
+    background-color: rgb(0, 236, 79);
+    
+    }
+
+    .videoplayer{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: rgb(88, 146, 255);
+    margin: 0;
+    }
+    .videobox{
+    position:relative;
+    width: 50%;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+    }
+</style>
+
+<style>
+        .works{
+            position: relative;
+            width: 50%;
+            height: auto;
+            margin: 20px auto;
+            
+            background-color:rgb(97, 48, 25);
+        }
+        .work{
+            margin: 0px auto;
+            background-color: rgb(255, 255, 255);
+            position: relative;
+            width:100%;
+            height: auto;
+            
+            background-size:cover; 
+            background-size:contain;
+            -moz-background-size: cover;
+            background-position: center center;
+        }
+        .work img{
+            position: relative;
+            width: 100%;
+            height: auto;
+            margin: 20px auto;
+            
+            
+            
+            }
+</style>
+</head>
+
+
+
+
+
+
+
+<body>
+    <div class="videobox">
+    <!-- <div class="video-responsive"> -->
+        <video class="videoplayer"  src="./image/ss.mp4" frameborder="0" allowfullscreen controls></video>
+    <!-- </div> -->
+</div>
+<!--图片地区，作品罗列-->
+
+    <div class="works row"> 
+
+        <div class="work col-xs-12 col-sm-12 col-md-6 col-lg-6" href="www.baidu.com">    <!--图片加链接把div改为a标签-->
+            <img class="pure-img" src="./image/1.jpg">
+            <img class="pure-img" src="./image/5.jpg">
+            <img class="pure-img" src="./image/3.jpg">
+            <img class="pure-img" src="./image/2.jpg">
+        </div>
+       
+
+        
+
+       
+
+        
+
+      
+
+</div>
+</body>
+</html>
