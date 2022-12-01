@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="//www.sucainiu.com/themes/demo/css/style.css" rel="stylesheet" media="all"> -->
+    <title>SCY-D</title>
+<!-- 逻辑说明： 共用区域（导航区- 图片区）—————— 小尺寸区（导航区- 图片区）———————— 大尺寸区（导航区- 图片区）-->
+
+<!-- 共用部分———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
+
+    <style>
+        /* 调整整体页面 */
+            body{
+                    margin: 0px;
+                    padding: 0;        
+            }
+        
+    </style>
+
+        
+<!-- 自定义公用字体 -->
+    <style>
+        @font-face {
+            font-family:abc H;
+            src: url(fonts/ABCDiatype-Heavy-Trial.otf);
+        }
+        @font-face {
+            font-family:abc L;
+            src: url(fonts/ABCDiatype-Light-Trial.otf);
+        }
+        @font-face {
+            font-family:abc BL;
+            src: url(fonts/ABCDiatype-Black-Trial.otf);
+        }
+        @font-face {
+            font-family:abc BO;
+            src: url(fonts/ABCDiatype-Bold-Trial.otf);
+        }
+        @font-face {
+            font-family:abc M;
+            src: url(fonts/ABCDiatype-Medium-Trial.otf);
+        }
+        @font-face {
+            font-family:abc R;
+            src: url(fonts/ABCDiatype-Regular-Trial.otf);
+        }
+        @font-face {
+            font-family:abc U;
+            src: url(fonts/ABCDiatype-Ultra-Trial.otf);
+        }
+        @font-face {
+            font-family:abc T;
+            src: url(fonts/ABCDiatype-Thin-Trial.otf);
+        }
+        @font-face {
+            font-family:pingfang R;
+            src: url(fonts/PingFang\ Regular.ttf);
+        }
+        @font-face {
+            font-family:pingfang M;
+            src: url(fonts/PingFang\ Medium.ttf);
+        }
+        @font-face {
+            font-family:pingfang L;
+            src: url(fonts/PingFang\ Light.ttf);
+        }
+        @font-face {
+            font-family:pingfang H;
+            src: url(fonts/PingFang\ Heavy.ttf);
+        }
+        @font-face {
+            font-family:pingfang EL;
+            src: url(fonts/PingFang\ ExtraLight.ttf);
+        }
+        @font-face {
+            font-family:pingfang B;
+            src: url(fonts/PingFang\ Bold.ttf);
+        }
+        
+        
+        
+        /* 设置全局字体 */
+        /* p{
+            font-family: abc H;
+            color:rgb(17, 0, 112);
+        } */
+    </style>
+
+
+<!-- 共用导航区 -->
+    <style>
+        /* 层级1 固定导航的盒子 ##############################################################################################################*/
+            .guding{
+                    position:fixed;  /* 固定导航位置不随页面滑动 */
+                    z-index: 999;   /* 飘在最上层 */
+                    height: 100px;
+                    width:100%;                
+            }
+
+
+        /* 层级2 整个菜单menu  ###############################################################################################################*/
+            .menu{
+                    height: 100px; /* 控制导航整体高度 */
+                    background-color: rgb(185, 185, 185,0);
+                    margin: 0 10px;               
+            }
+
+
+        /* 层级3 伸缩盒设置   ################################################################################################################*/
+            #box{
+                    width:100%;/* 相对于父级占比 */
+                    /* aspect-ratio:5/1;  */  /* 父级可以不设置比例 由子级撑开 */
+                    background-color: rgb(161, 206, 124,0);  /* 颜色值第四个数是透明度 */
+                    
+                    display: flex;
+                    flex-wrap: wrap; /* 让超出的部分换行  设置换行和排列轴向也可用简写 flex-flow:row wrap; */
+                    align-content: center;
+            }
+
+            
+        /* 层级4 伸缩盒，子div统一设置  #######################################################################################################*/
+            #box div{
+                    /* aspect-ratio:7/1; */ /* 控制盒子比例 */
+                    height: 150px;
+                    background-color: rgb(115, 215, 255,0);
+                    flex-basis:1px; /* 设置基础值后width将失效 */  /* 此值缩放会影响div的最小宽度 */
+                    /* 控制其中所有元素的边距 */
+                    margin: 0px 20px; 
+                    flex-grow: 1;
+                    flex-shrink: 1;
+            }
+
+
+        /* 层级4 分别设置伸缩盒，子div样式  ###################################################################################################*/
+            #box div:nth-child(1){
+                    background-color: rgb(255, 234, 189,0);
+                    flex-grow: 4; /* 允许扩充，  如果是1代表剩下的主轴宽度占1份，如果其他还有一个占4份 那一共是5份，剩下的宽度/5,就得到1份的宽度，和原来基础basis相加 */
+            }
+            #box div:nth-child(2){
+                    background-color: rgb(212, 191, 153,0);
+                    flex-grow: 4; 
+                    }
+                    #box div:nth-child(3){
+                    background-color: rgb(212, 191, 153,0);
+                    flex-grow: 4; 
+            }
+
+
+        /* 层级4 设置伸缩盒，指定div名字，的样式  ##############################################################################################*/
+            #box #logo{
+                   /* line-height: 50%; */
+                   /* vertical-align:bottom; */
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: end; /* 主轴对齐方式 */
+                    align-items: flex-start; /* 次轴对齐方式 */
+                    color: transparent;/* 去除跳动光标 */                   
+            }
+
+
+            /* 层级5 设置伸缩盒，子div的，子元素，文字样式  ####################################################################################*/
+            #box #logo a{
+                    text-decoration: none;
+                    display: inline-block;
+                    line-height: 70%;
+                    font-family:abc BO;
+                    font-size: 25px;                   
+                    color: rgb(0, 0, 0);
+                    /* 文字底色 */
+                    /* background-color: blue; */
+                    margin-bottom: 130px; /* 文字有间隙需要微调 在盒子中的上下距离 */
+                    margin-left: -5px; /* 文字有间隙需要微调 在盒子中的左右距离 */
+            }
+                   
+            
+            /* 层级4 设置伸缩盒，指定div名字，的样式  #########################################################################################*/
+            #box #about{
+                   /* line-height: 50%; */
+                    vertical-align:bottom;
+                    text-align: end;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: end; /* 主轴对齐方式 */
+                    align-items: flex-start; /* 次轴对齐方式 */
+                    color: transparent;/* 去除跳动光标 */       
+            }
+
+
+            /* 层级5 设置伸缩盒，子div的，子元素，文字样式  ####################################################################################*/
+            #box #about a{
+                    text-decoration: none;
+                    display: inline-block;
+                    line-height: 70%;
+                    /* background-color: blue; */
+                    font-family:abc BO;
+                    font-size: 25px;
+                    color: rgb(0, 0, 0);
+                    margin-bottom: 130px;
+            }
+
+
+            /* 层级1 手机菜单三和X默认关闭 ####################################################################################################*/
+            #toggleIcon{
+                    display: none;    
+            }
+
+
+            /* 层级1 手机菜单装文字的父div默认关闭 #############################################################################################*/
+            #menu-overlay{
+                    display: none;    
+            }
+
+            
+    </style>
+
+
+<!-- 图片区 -->
+    <style>
+
+        /* 层级1  图片的最外层大容器设置 整体宽高 边距 背景色 ######################################################################################*/
+            .container{
+                    /* width: 100%; */
+                    height: 100%; /* 此处100% 随子元素撑开 */
+                    background-color: rgb(131, 212, 0,0);
+                    margin: 80px 10px; /* 图片和导航之间的间隔 */
+                    margin-bottom: 10px;
+                        
+                    /*  padding: 0 20px; */
+            }
+
+
+        /* 层级2  div0 设置为flex伸缩盒子 设置伸缩盒子内部，子div都会按伸缩盒的定义来变化（如果需要定位，需要在div0外套一个div，在div的父div上设置固定位置）##########*/
+            #div0{
+                    width: 100%;
+                    height: 570px;
+                    background-color: rgb(153, 93, 75，1);
+                    margin-bottom: 0px;
+                    display: flex;
+                    flex-direction:/* column */ row/* -reverse */;
+                    flex-wrap: wrap; /* 让超出的部分换行  设置换行和排列轴向也可用简写 flex-flow:row wrap; */
+                    /* justify-content: center; */
+                    align-content: center;
+            }
+
+
+
+        /* 层级3  div0下，单个装图单位 比实际显示的图片区域大  #####################################################################################*/
+            #div0 div:nth-child(1){
+                    background-color: rgb(134, 134, 134, 1);
+                    flex-grow: 1;
+            }
+            #div0 div:nth-child(2){
+                    background-color: rgb(66, 66, 66, 1);
+                    flex-grow: 4;
+            }
+            #div0 div:nth-child(3){
+                    background-color: rgb(100, 100, 100, 1);
+                    flex-grow: 1;
+            }
+            #div0 div:nth-child(4){
+                    background-color: rgb(66, 66, 66, 1);
+                    flex-grow: 4;
+            }
+            #div0 div:nth-child(5){
+                    background-color: rgb(66, 66, 66, 1);
+                    flex-grow: 1;
+            }
+            #div0 div:nth-child(6){
+                    background-color: rgb(66, 66, 66, 1);
+                    flex-grow: 4;
+            }
+            #div0 div:nth-child(7){
+                    background-color: rgb(134, 134, 134, 1);
+                    flex-grow: 1;
+            }
+            #div0 div:nth-child(8){
+                    background-color: rgb(66, 66, 66, 1);
+                    flex-grow: 4;
+            }
+            #div0 div:nth-child(9){
+                    background-color: rgb(100, 100, 100, 1);
+                    flex-grow: 1;
+            }
+            #div0 div:nth-child(10){
+                    background-color: rgb(66, 66, 66, 1);
+                    flex-grow: 4;
+            }
+            #div0 div:nth-child(11){
+                    background-color: rgb(66, 66, 66, 1);
+                    flex-grow: 1;
+            }
+            #div0 div:nth-child(12){
+                    background-color: rgb(66, 66, 66, 1);
+                    flex-grow: 4;
+            }
+
+
+            /* 层级3  此层控制单个装图单位的大小尺寸和比例  #######################################################################################*/
+            #div0 div{
+                    float:left;
+                    /* height: 300px; */
+                    width: 400px;
+                    aspect-ratio:1/1;   /* 控制图片显示大小 */
+                    margin-bottom: 0px;      
+                    display: flex;
+                    justify-content: center;   
+                                          
+            }
+
+           
+           
+            /* 层级4  此层控制实际图片显示的大小尺寸和比例  #######################################################################################*/
+            #div0 div .son{
+                    width: 100%; /* 单张图片宽度 */
+                    height: 90%; /* 单张图片高度 */
+                    background-color: rgb(167, 202, 255);
+                    margin: 0 10px; /* 控制图片左右宽度，覆盖上面的100% */                
+                    display: flex;
+                    flex-direction: column;
+                    justify-content:end;                
+                
+            }
+
+
+             /* 层级4  此层控制单个装图单位的大小尺寸和比例  #######################################################################################*/
+             #div0 div #son1{
+                    /* width: 50%;
+                    height: 50%;                      */
+            }
+
+
+            /* 层级3  此层控制 图片下文字样式  ###################################################################################################*/
+            #div0 div .son p{
+                    float: left;
+                    background-color:rgb(230, 230, 230,0);
+                    margin-bottom: -25px;
+                    /* opacity: 0.6; */
+                    font-family: pingfang R;
+                    font-size: 15px;
+                    font-weight: 900;      
+                    /* opacity: 0;   */
+                
+            }
+    </style>
+
+
+
+<!-- 小屏部分---菜单文字和图标默认样式，及交互样式--------------------------------------------------------------------------------------------------->
+
+
+    <style media="(max-width:768px)">
+
+            /* 层级5 手机小尺寸时，隐藏大屏导航文字  ############################################################################################*/
+            #box #about a{
+                    font-size: 0;  /* 默认隐藏大尺寸菜单右侧文字 */
+            }
+
+
+           /* 层级1 手机菜单三和X在，小尺寸，时样式 #############################################################################################*/
+            #toggleIcon{
+                    display: block;  /*手机导航图标设置 */   
+            }
+
+
+            /* 层级1 手机菜单装文字的，父div，小尺寸，时样式 #####################################################################################*/
+            #menu-overlay{
+                    display: block;
+                    position: fixed; 
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: rgb(138, 138, 138);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    opacity: 0; /* 未点击状态透明度是0*/
+                    transition: 0.2s;  /* 开启时间 */
+                }
+
+                
+            /* 层级1 鼠标点击菜单，的样式 #######################################################################################################*/
+            #menu-overlay.active{
+                    opacity: 1; /* 点击后透明度值变成1 */
+                }
+
+        
+            /* 层级2 手机全屏菜单上，段落  样式 #################################################################################################*/
+            #menu-overlay ul li{
+                    position: relative;
+                    list-style: none;
+                    text-align: center;
+                    display: block;
+                }
+
+
+            /* 层级3 手机全屏菜单上，默认显示，文字样式 ##########################################################################################*/
+            #menu-overlay ul li a{   /* 文字样式设置 */
+                    position: relative;
+                    text-decoration: none;
+                    font-size: 5em;
+                    padding: 0 30px;
+                    color:rgb(0, 0, 0);
+                    font-family:abc BO;   /* 字体 */
+                    font-weight: 500;
+                    /* 下面增加手机导航全屏文字行距 */
+                    display:block;
+                    list-style-type:none;
+                    margin:40px;
+                    /* text-transform: uppercase; */
+                    /* display: inline-block; */
+                    
+                }
+
+
+            /* 层级3 手机全屏菜单上，鼠标交互，文字样式 ###########################################################################################*/
+                #menu-overlay ul li a:hover{ /* 鼠标经过文字改颜色 */
+                    color: rgb(236, 236, 236);
+                    transition: all 0.3S; /* 改颜色的时间限制 */
+                }
+
+
+            /* 层级1 手机全屏菜单未开启，三图标，默认样式 #########################################################################################*/
+                #toggleIcon{    /* 三横图标位置和大小 */
+                    position: fixed;
+                    top:20px;
+                    right: 30px;
+                    width: 25px;
+                    height: 25px;
+                    background:url(./image/导航三横\ 黑.svg); /* 三横图标 */
+                    background-repeat: no-repeat;
+                    background-size:100%;
+                    z-index: 10000;
+                    cursor:pointer;
+                    color: transparent; /* 去除三横位置的光标闪动 */
+                    /* text-shadow: 0 0 0 #2196f3; */
+                }
+
+            /* 层级1 手机全屏菜单开启后，X图标，默认样式 ###########################################################################################*/
+                #toggleIcon.active{  /* 开启导航后的X图标 */
+                    background: url(./image/导航关闭\ 黑.svg);  /* X 图标 */
+                    background-repeat: no-repeat;
+                    background-size:100%;
+                    top:20px;
+                }
+
+
+            /* 层级1 手机全屏菜单开启，鼠标和X图标交互的，交互样式 ##################################################################################*/
+                #toggleIcon.active:hover{
+                    /* 鼠标hover时X变化 */
+                    /* background: url(./image/导航关闭\ 白.svg); */  /* X 图标 */
+                    background-repeat: no-repeat;
+                    background-size:100%;
+                }
+                
+    </style>
+
+
+
+
+<!-- 断点控制----------断点栏数自动适应 ，12个图框适应最强，除1，2，3，4都可以------------------------------------------------------------------------>
+<!-- 小屏部分------------------------------------------------------------------------------------------------------------------------------------->
+
+
+    <style media="(max-width:768px)">
+                #div0 div{
+                            width: 50%; /* 控制列数 100是1/1 那总的是1列 */
+                }
+                
+    </style>
+
+
+<!-- 中屏部分------------------------------------------------------------------------------------------------------------------------------------->
+
+
+　  <style media="(min-width:768px) and (max-width:1400px)">
+
+                #div0 div{
+                            width: 50%; /* 控制列数 50是1/2 那总的是2列 */
+                }
+
+    </style>
+
+
+<!-- 大屏部分--------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+    <style media="(min-width:1000px)">
+        
+                #div0 div{
+                            width: 50%; /* 控制列数 33.3是1/3 那总的是3列 */
+                }
+
+    </style>
+
+
+<!-- 超大屏部分--------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<style media="(min-width:1600px)">
+        
+                #div0 div{
+                            width: 50%; /* 控制列数 25是1/4 那总的是4列 */
+                }    
+
+    </style>
+
+
+</head>
+
+
+
+
+
+
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+<!-- body 部分********************************************************************************************************************************-->
+
+
+
+
+
+
+<body>
+<!-- 导航————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
+    
+    <div id="toggleIcon" onclick="menuToggle()"></div>
+    <div id="menu-overlay">
+        <ul>
+            <!-- <li><a href="#">SCY DESIGN</a></li> -->
+            <li><a href="#">WORKS</a></li>
+            <li><a href="#">PHOTOGRAPHY </a></li>
+            <li><a href="#">INFO</a></li>
+        </ul>
+    </div>
+
+
+
+    <!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span> -->
+
+    <div class="guding">   <!-- 这是一个固定导航的盒子，里面放flex动态布局盒 -->
+        <div class="menu"> <!-- 导航盒子 -->
+
+            <div id="box">
+                <div id="logo" style="font-size: 100px; vertical-align: bottom;">
+                    <a href="#">SCY-D</a>
+                </div>
+
+                <div id="about" style="text-align: right; font-size: 50px;">
+                    <a href="#" style=" text-decoration: none;" id="ab">Works</a>  <!-- 小尺寸隐藏 -->
+                </div>
+
+                <div id="about" style="text-align: right; font-size: 50px;">
+                    <a href="#" style=" text-decoration: none;" id="ab">Info</a>  <!-- 小尺寸隐藏 -->
+                </div>
+            
+
+            </div>
+
+        </div>
+    </div>
+
+<!-- 图片——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->    
+
+<div class="container">
+
+        <div id="div0">
+            <div style="aspect-ratio:2/1;background-color: blue;"><div class="son" style="background:url(./image/SEE\ THROUGH.jpg) no-repeat center ;background-size:cover;"></div></div>
+            <!-- <div><div class="son" style="background:url(./image/gif01.gif) no-repeat center ;background-size:cover;"><p>柔性刚性</p></div></div> -->  
+        </div>
+
+
+        <div id="div0">
+            <div style="aspect-ratio:2/1;background-color: rgb(0, 255, 98);"><div class="son" style="background:url(./image/SEE\ THROUGH.jpg) no-repeat center ;background-size:cover;"></div></div>
+            <!-- <div><div class="son" style="background:url(./image/gif01.gif) no-repeat center ;background-size:cover;"><p>柔性刚性</p></div></div> -->  
+        </div>
+
+
+        <div id="div0">
+            <div style="aspect-ratio:1/1;background-color: rgb(225, 0, 255);"><div class="son" style="background:url(./image/Verner\ Panton\ Panthella.jpg) no-repeat center ;background-size:cover;"></div></div>
+            <div style="aspect-ratio:1/1;background-color: rgb(255, 145, 0);"><div class="son" style="background:url(./image/gif01.gif) no-repeat center ;background-size:cover;"></div></div>
+        </div>
+
+        <div id="div0">
+            <div style="aspect-ratio:2/1;background-color: rgb(0, 255, 98);"><div class="son" style="background:url(./image/SEE\ THROUGH.jpg) no-repeat center ;background-size:cover;"></div></div>
+            <!-- <div><div class="son" style="background:url(./image/gif01.gif) no-repeat center ;background-size:cover;"><p>柔性刚性</p></div></div> -->  
+        </div>
+
+    
+
+        
+        
+</div>
+
+
+
+<!-- JS动态——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->  
+
+
+<script>
+ /*    function openNav() {
+      document.getElementById("myNav").style.display = "block";
+      
+    }
+    
+    function closeNav() {
+      document.getElementById("myNav").style.display = "";
+      var myNav = document.getElementById('myNav');
+	      
+    }
+
+ */
+  
+</script>
+
+<script type="text/javascript">
+    function menuToggle(){
+        var nav=document.getElementById('menu-overlay');
+        nav.classList.toggle('active');
+        var nav=document.getElementById('toggleIcon');
+        nav.classList.toggle('active');
+}
+</script>
+
+
+
+
+
+</body>
+</html>
