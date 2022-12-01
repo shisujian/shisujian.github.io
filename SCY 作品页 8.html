@@ -90,130 +90,172 @@
 
 
 <!-- 共用导航区 -->
-    <style>
-        /* 层级1 固定导航的盒子 ##############################################################################################################*/
-            .guding{
-                    position:fixed;  /* 固定导航位置不随页面滑动 */
-                    z-index: 999;   /* 飘在最上层 */
-                    height: 100px;
-                    width:100%;                
-            }
+<style>
+    /* 层级1 固定导航的盒子 ##############################################################################################################*/
+        .guding{
+                position:fixed;  /* 固定导航位置不随页面滑动 */
+                z-index: 999;   /* 飘在最上层 */
+                height: 100px;
+                width:100%;                
+        }
 
 
-        /* 层级2 整个菜单menu  ###############################################################################################################*/
-            .menu{
-                    height: 100px; /* 控制导航整体高度 */
-                    background-color: rgb(185, 185, 185,0);
-                    margin: 0 10px;               
-            }
+    /* 层级2 整个菜单menu  ###############################################################################################################*/
+        .menu{
+                height: 100px; /* 控制导航整体高度 */
+                background-color: rgb(45, 72, 161,0);
+                margin: -10px 10px;               
+        }
 
 
-        /* 层级3 伸缩盒设置   ################################################################################################################*/
-            #box{
-                    width:100%;/* 相对于父级占比 */
-                    /* aspect-ratio:5/1;  */  /* 父级可以不设置比例 由子级撑开 */
-                    background-color: rgb(161, 206, 124,0);  /* 颜色值第四个数是透明度 */
-                    
-                    display: flex;
-                    flex-wrap: wrap; /* 让超出的部分换行  设置换行和排列轴向也可用简写 flex-flow:row wrap; */
-                    align-content: center;
-            }
+    /* 层级3 伸缩盒设置   ################################################################################################################*/
+        #box{
+                width:100%;/* 相对于父级占比 */
+                /* aspect-ratio:5/1;  */  /* 父级可以不设置比例 由子级撑开 */
+                background-color: rgb(161, 206, 124,0);  /* 颜色值第四个数是透明度 */
+                
+                display: flex;
+                flex-wrap: wrap; /* 让超出的部分换行  设置换行和排列轴向也可用简写 flex-flow:row wrap; */
+                align-content: center;
+        }
 
-            
-        /* 层级4 伸缩盒，子div统一设置  #######################################################################################################*/
-            #box div{
-                    /* aspect-ratio:7/1; */ /* 控制盒子比例 */
-                    height: 150px;
-                    background-color: rgb(115, 215, 255,0);
-                    flex-basis:1px; /* 设置基础值后width将失效 */  /* 此值缩放会影响div的最小宽度 */
-                    /* 控制其中所有元素的边距 */
-                    margin: 0px 20px; 
-                    flex-grow: 1;
-                    flex-shrink: 1;
-            }
-
-
-        /* 层级4 分别设置伸缩盒，子div样式  ###################################################################################################*/
-            #box div:nth-child(1){
-                    background-color: rgb(255, 234, 189,0);
-                    flex-grow: 4; /* 允许扩充，  如果是1代表剩下的主轴宽度占1份，如果其他还有一个占4份 那一共是5份，剩下的宽度/5,就得到1份的宽度，和原来基础basis相加 */
-            }
-            #box div:nth-child(2){
-                    background-color: rgb(212, 191, 153,0);
-                    flex-grow: 4; 
-                    }
-                    #box div:nth-child(3){
-                    background-color: rgb(212, 191, 153,0);
-                    flex-grow: 4; 
-            }
+        
+    /* 层级4 伸缩盒，子div统一设置  #######################################################################################################*/
+        #box div{
+                /* aspect-ratio:7/1; */ /* 控制盒子比例 */
+                height: 150px;
+                background-color: rgb(115, 215, 255,0);
+                flex-basis:1px; /* 设置基础值后width将失效 */  /* 此值缩放会影响div的最小宽度 */
+                /* 控制其中所有元素的边距 */
+                margin: 0px 0px; 
+                flex-grow: 1;
+                flex-shrink: 1;
+        }
 
 
-        /* 层级4 设置伸缩盒，指定div名字，的样式  ##############################################################################################*/
-            #box #logo{
-                   /* line-height: 50%; */
-                   /* vertical-align:bottom; */
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: end; /* 主轴对齐方式 */
-                    align-items: flex-start; /* 次轴对齐方式 */
-                    color: transparent;/* 去除跳动光标 */                   
-            }
+    /* 层级4 分别设置伸缩盒，子div样式  ###################################################################################################*/
+        #box div:nth-child(1){
+                background-color: rgb(255, 234, 189,0);
+                flex-grow: 1; /* 允许扩充，  如果是1代表剩下的主轴宽度占1份，如果其他还有一个占4份 那一共是5份，剩下的宽度/5,就得到1份的宽度，和原来基础basis相加 */
+        }
+        #box div:nth-child(2){
+                background-color: rgb(212, 191, 153,0);
+                flex-grow: 1; 
+                }
+        #box div:nth-child(3){
+                background-color: rgb(146, 130, 101,0);
+                flex-grow: 2; 
+        }
 
 
-            /* 层级5 设置伸缩盒，子div的，子元素，文字样式  ####################################################################################*/
-            #box #logo a{
-                    text-decoration: none;
-                    display: inline-block;
-                    line-height: 70%;
-                    font-family:abc BO;
-                    font-size: 25px;                   
-                    color: rgb(0, 0, 0);
-                    /* 文字底色 */
-                    /* background-color: blue; */
-                    margin-bottom: 130px; /* 文字有间隙需要微调 在盒子中的上下距离 */
-                    margin-left: -5px; /* 文字有间隙需要微调 在盒子中的左右距离 */
-            }
-                   
-            
-            /* 层级4 设置伸缩盒，指定div名字，的样式  #########################################################################################*/
-            #box #about{
-                   /* line-height: 50%; */
-                    vertical-align:bottom;
-                    text-align: end;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: end; /* 主轴对齐方式 */
-                    align-items: flex-start; /* 次轴对齐方式 */
-                    color: transparent;/* 去除跳动光标 */       
-            }
+    /* 层级4 设置伸缩盒，指定div名字，的样式  ##############################################################################################*/
+        #box #logo{
+               /* line-height: 50%; */
+               /* vertical-align:bottom; */
+                display: flex;
+                flex-direction: column;
+                justify-content: end; /* 主轴对齐方式 */
+                align-items: flex-start; /* 次轴对齐方式 */
+                color: transparent;/* 去除跳动光标 */                   
+        }
 
 
-            /* 层级5 设置伸缩盒，子div的，子元素，文字样式  ####################################################################################*/
-            #box #about a{
-                    text-decoration: none;
-                    display: inline-block;
-                    line-height: 70%;
-                    /* background-color: blue; */
-                    font-family:abc BO;
-                    font-size: 25px;
-                    color: rgb(0, 0, 0);
-                    margin-bottom: 130px;
-            }
+        /* 层级5 设置伸缩盒，子div的，子元素，文字样式  ####################################################################################*/
+        #box #logo a{
+                text-decoration: none;
+                display: inline-block;
+                line-height: 100%;
+                font-family:abc BO;
+                font-size: 20px;                   
+                color: rgb(0, 0, 0);
+                /* 文字底色 */
+                background-color: rgb(0, 0, 0,0);
+                margin-bottom: 130px; /* 文字有间隙需要微调 在盒子中的上下距离 */
+                margin-left: 0px; /* 文字有间隙需要微调 在盒子中的左右距离 */
+        }
+               
+        
+        /* 层级4 设置伸缩盒，指定div名字，的样式  #########################################################################################*/
+        #box #work{
+               /* line-height: 50%; */
+                vertical-align:bottom;
+                text-align: end;
+                display: flex;
+                flex-direction: column;
+                justify-content: end; /* 主轴对齐方式 */
+                align-items: flex-start; /* 次轴对齐方式 */
+                color: transparent;/* 去除跳动光标 */       
+        }
 
 
-            /* 层级1 手机菜单三和X默认关闭 ####################################################################################################*/
-            #toggleIcon{
-                    display: none;    
-            }
+        /* 层级5 设置伸缩盒，子div的，子元素，文字样式  ####################################################################################*/
+        #box #work a{
+                text-decoration: none;
+                display: inline-block;
+                line-height: 100%;
+                background-color: rgb(0, 0, 0,0);
+                font-family:abc BO;
+                font-size: 20px;
+                color: rgb(0, 0, 0);
+                margin-bottom: 130px;
+        }
+
+        /* 层级4 设置伸缩盒，指定div名字，的样式  #########################################################################################*/
+        #box #info{
+               /* line-height: 50%; */
+                vertical-align:bottom;
+                text-align: end;
+                display: flex;
+                flex-direction: column;
+                justify-content: end; /* 主轴对齐方式 */
+                align-items: flex-end; /* 次轴对齐方式 */
+                color: transparent;/* 去除跳动光标 */     
+                background-color: rgb(9, 0, 139,0);  
+        }
 
 
-            /* 层级1 手机菜单装文字的父div默认关闭 #############################################################################################*/
-            #menu-overlay{
-                    display: none;    
-            }
+        /* 层级5 设置伸缩盒，子div的，子元素，文字样式  ####################################################################################*/
+        #box #info a{
+                text-decoration: none;
+                display: inline-block;
+                line-height: 100%;
+                background-color: rgba(255, 255, 255, 0);
+                font-family:abc BO;
+                font-size: 20px;                    
+                color: rgb(0, 0, 0);
+                margin-bottom: 130px;
+                align-items: center;
+        }
 
-            
-    </style>
+       
+        #next{
+                align-self:flex-end;
+                margin-top:-50px;
+                background-color: rgb(255, 110, 43,0);
+                text-align: end;
+                font-family: abc R;
+                font-size: 18px;   
+                color:black;
+                margin-right: 5px;
+                }
+
+        #pre{
+                align-self:flex-end;
+                margin-bottom:-60px;
+                background-color:rgb(255 255 10,0);
+                text-align: end;
+                font-family: abc R;
+                font-size: 18px;   
+                color:black;
+                margin-right: 5px;
+        }
+
+
+
+        
+
+        
+</style>
 
 
 <!-- 图片区 -->
@@ -382,108 +424,10 @@
 
     <style media="(max-width:768px)">
 
-            /* 层级5 手机小尺寸时，隐藏大屏导航文字  ############################################################################################*/
-            #box #about a{
-                    font-size: 0;  /* 默认隐藏大尺寸菜单右侧文字 */
-            }
-
-
-           /* 层级1 手机菜单三和X在，小尺寸，时样式 #############################################################################################*/
-            #toggleIcon{
-                    display: block;  /*手机导航图标设置 */   
-            }
-
-
-            /* 层级1 手机菜单装文字的，父div，小尺寸，时样式 #####################################################################################*/
-            #menu-overlay{
-                    display: block;
-                    position: fixed; 
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background-color: rgb(138, 138, 138);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    opacity: 0; /* 未点击状态透明度是0*/
-                    transition: 0.2s;  /* 开启时间 */
-                }
-
-                
-            /* 层级1 鼠标点击菜单，的样式 #######################################################################################################*/
-            #menu-overlay.active{
-                    opacity: 1; /* 点击后透明度值变成1 */
-                }
+       
 
         
-            /* 层级2 手机全屏菜单上，段落  样式 #################################################################################################*/
-            #menu-overlay ul li{
-                    position: relative;
-                    list-style: none;
-                    text-align: center;
-                    display: block;
-                }
-
-
-            /* 层级3 手机全屏菜单上，默认显示，文字样式 ##########################################################################################*/
-            #menu-overlay ul li a{   /* 文字样式设置 */
-                    position: relative;
-                    text-decoration: none;
-                    font-size: 5em;
-                    padding: 0 30px;
-                    color:rgb(0, 0, 0);
-                    font-family:abc BO;   /* 字体 */
-                    font-weight: 500;
-                    /* 下面增加手机导航全屏文字行距 */
-                    display:block;
-                    list-style-type:none;
-                    margin:40px;
-                    /* text-transform: uppercase; */
-                    /* display: inline-block; */
-                    
-                }
-
-
-            /* 层级3 手机全屏菜单上，鼠标交互，文字样式 ###########################################################################################*/
-                #menu-overlay ul li a:hover{ /* 鼠标经过文字改颜色 */
-                    color: rgb(236, 236, 236);
-                    transition: all 0.3S; /* 改颜色的时间限制 */
-                }
-
-
-            /* 层级1 手机全屏菜单未开启，三图标，默认样式 #########################################################################################*/
-                #toggleIcon{    /* 三横图标位置和大小 */
-                    position: fixed;
-                    top:20px;
-                    right: 30px;
-                    width: 25px;
-                    height: 25px;
-                    background:url(./image/导航三横\ 黑.svg); /* 三横图标 */
-                    background-repeat: no-repeat;
-                    background-size:100%;
-                    z-index: 10000;
-                    cursor:pointer;
-                    color: transparent; /* 去除三横位置的光标闪动 */
-                    /* text-shadow: 0 0 0 #2196f3; */
-                }
-
-            /* 层级1 手机全屏菜单开启后，X图标，默认样式 ###########################################################################################*/
-                #toggleIcon.active{  /* 开启导航后的X图标 */
-                    background: url(./image/导航关闭\ 黑.svg);  /* X 图标 */
-                    background-repeat: no-repeat;
-                    background-size:100%;
-                    top:20px;
-                }
-
-
-            /* 层级1 手机全屏菜单开启，鼠标和X图标交互的，交互样式 ##################################################################################*/
-                #toggleIcon.active:hover{
-                    /* 鼠标hover时X变化 */
-                    /* background: url(./image/导航关闭\ 白.svg); */  /* X 图标 */
-                    background-repeat: no-repeat;
-                    background-size:100%;
-                }
+           
                 
     </style>
 
@@ -574,17 +518,6 @@
 <body>
 <!-- 导航————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->
     
-    <div id="toggleIcon" onclick="menuToggle()"></div>
-    <div id="menu-overlay">
-        <ul>
-            <!-- <li><a href="#">SCY DESIGN</a></li> -->
-            <li><a href="#">WORKS</a></li>
-            <li><a href="#">PHOTOGRAPHY </a></li>
-            <li><a href="#">INFO</a></li>
-        </ul>
-    </div>
-
-
 
     <!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span> -->
 
@@ -593,198 +526,109 @@
 
             <div id="box">
                 <div id="logo" style="font-size: 100px; vertical-align: bottom;">
-                    <a href="index.html">SCY-D</a>
+                    <a href="./index.html">SCY-D</a>
                 </div>
 
-                <div id="about" style="text-align: right; font-size: 50px;">
-                    <a href="works.html" style=" text-decoration: none;" id="ab">Works</a>  <!-- 小尺寸隐藏 -->
+                <div id="work" style="text-align: right; font-size: 50px;">
+                    <a href="./SCY 作品页 8.html" style=" text-decoration: none;" id="ab">WORKS</a>  
                 </div>
 
-                <div id="about" style="text-align: right; font-size: 50px;">
-                    <a href="SCY 详情详情页 2.html" style=" text-decoration: none;" id="ab">Info</a>  <!-- 小尺寸隐藏 -->
-                </div>
-            
-
-            </div>
+                <div id="info" style="text-align: right; font-size: 50px;">
+                    <a href="./SCY 详情详情页 5.html" style=" text-decoration: none;" id="t1">INFO</a>                                        
+                </div>           
+            </div>          
 
         </div>
-    </div>
+
+
+
 
 <!-- 图片——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————— -->    
 
 <div class="container">
+     
         <!-- 第一块 / 图 -->
-        <div id="div0">
+         <div id="div0">
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
 
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:77% 77%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:77% 77%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
 
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:34% 34%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:34% 34%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
 
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
 
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
 
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
 
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
 
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
 
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
 
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
 
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
 
             <div>
                 <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-           
-            
-        </div>
-
-        <!-- 第二块 / 图 -->
-        <div id="div0">
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:77% 77%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:34% 34%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
-                    <p>平行宇宙</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="son" >
-                    <div class="sonsonA1" style="background: url(./image/flag2-1400x904\ —\ Are.na.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
                     <p>平行宇宙</p>
                 </div>
             </div>
@@ -793,7 +637,97 @@
             
         </div>
 
-        
+         <!-- 第一块 / 图 -->
+         <div id="div0">
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:77% 77%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:34% 34%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="son" >
+                    <div class="sonsonA1" style="background: url(./image/Red\ and\ Black.jpg) no-repeat center; background-size:50% 50%;"></div>
+                    <p>平行宇宙</p>
+                </div>
+            </div>
+
+           
+            
+        </div>
+
+      
 
         
         
